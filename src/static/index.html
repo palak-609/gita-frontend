@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🕉 Gita Wisdom — Find Your Verse</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Tiro+Devanagari+Sanskrit&family=IM+Fell+English+SC&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --saffron: #E8620A;
+      --saffron-light: #F5A234;
+      --saffron-pale: #FFF3E0;
+      --gold: #C9922A;
+      --gold-deep: #8B6010;
+      --maroon: #6B1A1A;
+      --cream: #FDF6E3;
+      --cream-dark: #F5EAC8;
+      --ink: #1C1008;
+      --ink-soft: #3D2B0E;
+      --smoke: rgba(232, 98, 10, 0.08);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Crimson Pro', Georgia, serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ── Mandala background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(232, 98, 10, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(201, 146, 42, 0.10) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 50% at 0% 80%, rgba(107, 26, 26, 0.07) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Decorative top border ── */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--maroon), var(--saffron), var(--gold), var(--saffron), var(--maroon));
+      z-index: 100;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      padding: 72px 0 48px;
+      animation: fadeDown 1s ease both;
+    }
+
+    .om-symbol {
+      font-size: 3.2rem;
+      color: var(--saffron);
+      display: block;
+      margin-bottom: 12px;
+      animation: pulse 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 12px rgba(232, 98, 10, 0.4));
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.06);
+        opacity: 0.85;
+      }
+    }
+
+    h1 {
+      font-family: 'IM Fell English SC', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      color: var(--maroon);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--gold-deep);
+      opacity: 0.85;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 32px 0;
+      opacity: 0.5;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .divider span {
+      font-size: 1.1rem;
+      color: var(--saffron);
+    }
+
+    /* ── Search box ── */
+    .search-section {
+      animation: fadeUp 1s ease 0.3s both;
+    }
+
+    .search-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+      display: block;
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .search-wrap {
+      position: relative;
+      display: flex;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 18px 24px;
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.2rem;
+      color: var(--ink);
+      background: white;
+      border: 1.5px solid var(--cream-dark);
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .search-input::placeholder {
+      color: rgba(60, 40, 10, 0.35);
+      font-style: italic;
+    }
+
+    .search-input:focus {
+      border-color: var(--saffron);
+      box-shadow: 0 0 0 3px rgba(232, 98, 10, 0.12), 0 2px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .search-btn {
+      padding: 18px 32px;
+      background: linear-gradient(135deg, var(--saffron), var(--gold));
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      box-shadow: 0 4px 16px rgba(232, 98, 10, 0.35);
+      white-space: nowrap;
+    }
+
+    .search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(232, 98, 10, 0.45);
+    }
+
+    .search-btn:active {
+      transform: translateY(0);
+    }
+
+    .search-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ── Emotion tag chips ── */
+    .emotion-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+      justify-content: center;
+    }
+
+    .chip {
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--cream-dark);
+      background: white;
+      font-family: 'Crimson Pro', serif;
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chip:hover {
+      background: var(--saffron-pale);
+      border-color: var(--saffron-light);
+      color: var(--saffron);
+    }
+
+    /* ── Loading ── */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 60px 0;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .loading.visible {
+      display: block;
+    }
+
+    .lotus-spinner {
+      font-size: 2.8rem;
+      display: inline-block;
+      animation: spin 2s linear infinite;
+      margin-bottom: 16px;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gold-deep);
+      opacity: 0.7;
+    }
+
+    /* ── Emotion result badge ── */
+    .emotion-result {
+      display: none;
+      text-align: center;
+      margin: 40px 0 8px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .emotion-result.visible {
+      display: block;
+    }
+
+    .emotion-badge-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--gold-deep);
+      opacity: 0.75;
+      margin-bottom: 6px;
+      font-style: italic;
+    }
+
+    .emotion-badge {
+      display: inline-block;
+      padding: 10px 32px;
+      background: linear-gradient(135deg, var(--maroon), #9B2A2A);
+      color: #FFE0B2;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      border-radius: 4px;
+      box-shadow: 0 4px 16px rgba(107, 26, 26, 0.3);
+    }
+
+    .emotion-icons {
+      font-size: 1.5rem;
+      margin-top: 10px;
+    }
+
+    /* ── Verse cards ── */
+    .verses-section {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .verses-section.visible {
+      display: block;
+    }
+
+    .verses-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--gold-deep);
+      text-align: center;
+      margin-bottom: 28px;
+      opacity: 0.7;
+    }
+
+    .verse-card {
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 28px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+      border: 1px solid rgba(201, 146, 42, 0.2);
+      animation: fadeUp 0.7s ease both;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .verse-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .verse-card:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .verse-card:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+
+    .verse-header {
+      background: linear-gradient(135deg, var(--maroon) 0%, #9B3A1A 100%);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .verse-id {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 1rem;
+      color: #FFE0B2;
+      letter-spacing: 0.08em;
+    }
+
+    .verse-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      color: rgba(255, 224, 178, 0.6);
+      font-style: italic;
+    }
+
+    .verse-body {
+      padding: 28px 28px 24px;
+    }
+
+    .sanskrit-text {
+      font-family: 'Tiro Devanagari Sanskrit', 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      color: var(--ink);
+      line-height: 2;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--cream-dark);
+      letter-spacing: 0.02em;
+    }
+
+    .transliteration {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--gold-deep);
+      line-height: 1.8;
+      margin-bottom: 18px;
+      opacity: 0.8;
+    }
+
+    .translation-block {
+      background: var(--saffron-pale);
+      border-left: 3px solid var(--saffron);
+      border-radius: 0 4px 4px 0;
+      padding: 16px 20px;
+    }
+
+    .translation-label {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 0.8rem;
+      color: var(--saffron);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      opacity: 0.8;
+    }
+
+    .translation-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    /* ── Error state ── */
+    .error-box {
+      display: none;
+      background: #FFF5F5;
+      border: 1px solid #FFCDD2;
+      border-radius: 6px;
+      padding: 20px 24px;
+      margin-top: 32px;
+      text-align: center;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .error-box.visible {
+      display: block;
+    }
+
+    .error-box p {
+      color: #B71C1C;
+      font-size: 1rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 48px 0 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--gold-deep);
+      opacity: 0.5;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 560px) {
+      .search-wrap {
+        flex-direction: column;
+      }
+
+      .search-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .verse-body {
+        padding: 20px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header>
+      <span class="om-symbol">🕉</span>
+      <h1>Bhagavad Gita Wisdom</h1>
+      <p class="subtitle">Share what you feel — receive the verse meant for you</p>
+    </header>
+
+    <div class="divider"><span>✦</span></div>
+
+    <!-- Search -->
+    <section class="search-section">
+      <label class="search-label">How are you feeling right now?</label>
+      <div class="search-wrap">
+        <input class="search-input" id="userInput" type="text" placeholder="e.g. I feel lost and don't know what to do…"
+          autocomplete="off" />
+        <button class="search-btn" id="searchBtn" onclick="findVerses()">
+          Seek Wisdom
+        </button>
+      </div>
+
+      <!-- Quick emotion chips -->
+      <div class="emotion-chips">
+        <span class="chip" onclick="fillAndSearch('I am feeling very angry and frustrated')">😤 Angry</span>
+        <span class="chip" onclick="fillAndSearch('I feel deep sadness and grief')">😢 Sad</span>
+        <span class="chip" onclick="fillAndSearch('I am terrified and anxious about the future')">😨 Fearful</span>
+        <span class="chip" onclick="fillAndSearch('I feel joyful and grateful today')">😊 Joyful</span>
+        <span class="chip" onclick="fillAndSearch('I feel lost and confused about my path')">😕 Confused</span>
+        <span class="chip" onclick="fillAndSearch('I am consumed by desire I cannot control')">🔥 Lust</span>
+        <span class="chip" onclick="fillAndSearch('I always want more and am never satisfied')">💰 Greed</span>
+        <span class="chip" onclick="fillAndSearch('I cannot let go of someone I love')">🔗 Attachment</span>
+        <span class="chip" onclick="fillAndSearch('I lost someone dear and I am mourning')">🕯 Grief</span>
+        <span class="chip" onclick="fillAndSearch('My mind races with worry and I cannot stop')">😰 Anxiety</span>
+        <span class="chip" onclick="fillAndSearch('I am repulsed by the cruelty I see around me')">🤢 Disgust</span>
+        <span class="chip" onclick="fillAndSearch('I cannot believe what just happened to me')">😲 Surprise</span>
+        <span class="chip" onclick="fillAndSearch('I have no respect for people who lack integrity')">😒 Contempt</span>
+        <span class="chip" onclick="fillAndSearch('I feel deeply ashamed of what I did')">😳 Shame/Guilt 🫣</span>
+      </div>
+    </section>
+
+    <!-- Loading -->
+    <div class="loading" id="loading">
+      <div class="lotus-spinner">🪷</div>
+      <p>Seeking wisdom from the ancient verses…</p>
+    </div>
+
+    <!-- Emotion result -->
+    <div class="emotion-result" id="emotionResult">
+      <p class="emotion-badge-label">Detected emotion</p>
+      <div class="emotion-badge" id="emotionBadge">—</div>
+      <div class="emotion-icons" id="emotionIcons"></div>
+    </div>
+
+    <!-- Verses -->
+    <div class="verses-section" id="versesSection">
+      <p class="verses-heading">The Gita speaks to you through these verses</p>
+      <div id="versesList"></div>
+    </div>
+
+    <!-- Error -->
+    <div class="error-box" id="errorBox">
+      <p id="errorMsg">Something went wrong. Please try again.</p>
+    </div>
+
+    <div class="divider" style="margin-top:48px"><span>✦</span></div>
+
+    <footer>
+      <p>यदा यदा हि धर्मस्य — Whenever there is a decline in righteousness…</p>
+    </footer>
+
+  </div>
+
+  <script>
+    // ── Config — update this URL once your Flask API is running ──────────────
+    // Local development:   http://localhost:5000/predict
+    // HuggingFace Spaces:  https://YOUR_SPACE.hf.space/predict
+const API_URL = 'https://palakhf-gita-nlp.hf.space/predict';
+
+    // ── Emotion display config ────────────────────────────────────────────────
+    const EMOTION_META = {
+      anger: { icon: '😤', label: 'Anger', color: '#B71C1C' },
+      sadness: { icon: '🌧', label: 'Sadness', color: '#1A237E' },
+      fear: { icon: '🌑', label: 'Fear', color: '#4A148C' },
+      joy: { icon: '☀️', label: 'Joy', color: '#E65100' },
+      confusion: { icon: '🌀', label: 'Confusion', color: '#1B5E20' },
+      lust: { icon: '🔥', label: 'Lust', color: '#880E4F' },
+      greed: { icon: '💰', label: 'Greed', color: '#827717' },
+      'attachment/delusion': { icon: '🔗', label: 'Attachment', color: '#4E342E' },
+      grief: { icon: '🕯', label: 'Grief', color: '#37474F' },
+      anxiety: { icon: '😰', label: 'Anxiety', color: '#1A237E' },
+      disgust: { icon: '🤢', label: 'Disgust', color: '#33691E' },
+      surprise: { icon: '😲', label: 'Surprise', color: '#E65100' },
+      contempt: { icon: '😒', label: 'Contempt', color: '#4A148C' },
+      'shame/guilt': { icon: '😳🫣', label: 'Shame/Guilt', color: '#6B1A1A' },
+      unknown: { icon: '🙏', label: 'Unknown', color: '#4E342E' },
+    };
+
+    // ── Fallback verse data (used when Java backend is offline) ──────────────
+    // Replace this with a real call to your Spring Boot API once it's running.
+    const FALLBACK_VERSES = {
+      anger: [
+        {
+          chapter: 2, verse: 62, sanskrit: 'ध्यायतो विषयान्पुंसः सङ्गस्तेषूपजायते।\nसङ्गात्सञ्जायते कामः कामात्क्रोधोऽभिजायते॥',
+          transliteration: 'dhyāyato viṣayān puṁsaḥ saṅgas teṣūpajāyate\nsaṅgāt sañjāyate kāmaḥ kāmāt krodho \'bhijāyate',
+          translation: 'When a person keeps thinking about sense objects, attachment to them arises. From attachment, desire is born; from desire, anger arises.'
+        },
+        {
+          chapter: 2, verse: 63, sanskrit: 'क्रोधाद्भवति सम्मोहः सम्मोहात्स्मृतिविभ्रमः।\nस्मृतिभ्रंशाद् बुद्धिनाशो बुद्धिनाशात्प्रणश्यति॥',
+          transliteration: 'krodhād bhavati sammohaḥ sammohāt smṛti-vibhramaḥ\nsmṛti-bhraṁśād buddhi-nāśo buddhi-nāśāt praṇaśyati',
+          translation: 'From anger comes delusion; from delusion, loss of memory; from loss of memory, destruction of intelligence; and from destruction of intelligence, one perishes.'
+        },
+        {
+          chapter: 3, verse: 37, sanskrit: 'श्री भगवानुवाच: काम एष क्रोध एष रजोगुणसमुद्भवः।\nमहाशनो महापाप्मा विद्ध्येनमिह वैरिणम्॥',
+          transliteration: 'kāma eṣa krodha eṣa rajo-guṇa-samudbhavaḥ\nmahāśano mahā-pāpmā viddhy enam iha vairiṇam',
+          translation: 'It is lust and anger, born of the mode of passion — all-devouring and sinful. Know this to be your enemy here on earth.'
+        },
+      ],
+      sadness: [
+        {
+          chapter: 2, verse: 14, sanskrit: 'मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः।\nआगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥',
+          transliteration: 'mātrā-sparśās tu kaunteya śītoṣṇa-sukha-duḥkha-dāḥ\nāgamāpāyino \'nityās tāṁs titikṣasva bhārata',
+          translation: 'O son of Kuntī, the contacts between the senses and the sense objects give rise to fleeting perceptions of happiness and distress. These are non-permanent; bear them patiently.'
+        },
+        {
+          chapter: 2, verse: 20, sanskrit: 'न जायते म्रियते वा कदाचिन्नायं भूत्वा भविता वा न भूयः।\nअजो नित्यः शाश्वतोऽयं पुराणो न हन्यते हन्यमाने शरीरे॥',
+          transliteration: 'na jāyate mriyate vā kadācin nāyaṁ bhūtvā bhavitā vā na bhūyaḥ\najo nityaḥ śāśvato \'yaṁ purāṇo na hanyate hanyamāne śarīre',
+          translation: 'The soul is never born, nor does it ever die. It has not come into being, and will not come into being. It is unborn, eternal, ever-existing, and primeval. It is not slain when the body is slain.'
+        },
+        {
+          chapter: 18, verse: 66, sanskrit: 'सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥',
+          transliteration: 'sarva-dharmān parityajya mām ekaṁ śaraṇaṁ vraja\nahaṁ tvāṁ sarva-pāpebhyo mokṣayiṣyāmi mā śucaḥ',
+          translation: 'Abandon all varieties of dharma and simply surrender unto Me. I shall deliver you from all sinful reactions. Do not fear.'
+        },
+      ],
+      fear: [
+        {
+          chapter: 4, verse: 10, sanskrit: 'वीतरागभयक्रोधा मन्मया मामुपाश्रिताः।\nबहवो ज्ञानतपसा पूता मद्भावमागताः॥',
+          transliteration: 'vīta-rāga-bhaya-krodhā man-mayā mām upāśritāḥ\nbahavo jñāna-tapasā pūtā mad-bhāvam āgatāḥ',
+          translation: 'Freed from attachment, fear, and anger, absorbed in thought of Me, taking refuge in Me, purified by the fire of knowledge — many have attained My nature.'
+        },
+        {
+          chapter: 2, verse: 40, sanskrit: 'नेहाभिक्रमनाशोऽस्ति प्रत्यवायो न विद्यते।\nस्वल्पमप्यस्य धर्मस्य त्रायते महतो भयात्॥',
+          transliteration: 'nehābhikrama-nāśo \'sti pratyavāyo na vidyate\nsvalpaṁ apy asya dharmasya trāyate mahato bhayāt',
+          translation: 'In this endeavour there is no loss or diminution, and even a little advancement on this path can protect one from the greatest fear.'
+        },
+        {
+          chapter: 18, verse: 30, sanskrit: 'प्रवृत्तिं च निवृत्तिं च कार्याकार्ये भयाभये।\nबन्धं मोक्षं च या वेत्ति बुद्धिः सा पार्थ सात्त्विकी॥',
+          transliteration: 'pravṛttiṁ ca nivṛttiṁ ca kāryākārye bhayābhaye\nbandhaṁ mokṣaṁ ca yā vetti buddhiḥ sā pārtha sāttvikī',
+          translation: 'O Pārtha, the intellect that knows what is to be done and what is not to be done, what is to be feared and what is not to be feared, what binds and what liberates — that intellect is of the nature of goodness.'
+        },
+      ],
+      joy: [
+        {
+          chapter: 5, verse: 21, sanskrit: 'बाह्यस्पर्शेष्वसक्तात्मा विन्दत्यात्मनि यत्सुखम्।\nस ब्रह्मयोगयुक्तात्मा सुखमक्षयमश्नुते॥',
+          transliteration: 'bāhya-sparśeṣv asaktātmā vindaty ātmani yat sukham\nsa brahma-yoga-yuktātmā sukham akṣayam aśnute',
+          translation: 'Such a liberated person is not attracted to material sense pleasure, but is always in trance, enjoying the pleasure within. He enjoys unlimited happiness, for he concentrates on the Supreme.'
+        },
+        {
+          chapter: 2, verse: 55, sanskrit: 'प्रजहाति यदा कामान्सर्वान्पार्थ मनोगतान्।\nआत्मन्येवात्मना तुष्टः स्थितप्रज्ञस्तदोच्यते॥',
+          transliteration: 'prajahāti yadā kāmān sarvān pārtha mano-gatān\nātmany evātmanā tuṣṭaḥ sthita-prajñas tadocyate',
+          translation: 'O Pārtha, when a person gives up all desires that enter the mind and is satisfied in the Self by the Self alone, then that person is said to be of steady wisdom.'
+        },
+        {
+          chapter: 6, verse: 20, sanskrit: 'यत्रोपरमते चित्तं निरुद्धं योगसेवया।\nयत्र चैवात्मनात्मानं पश्यन्नात्मनि तुष्यति॥',
+          transliteration: 'yatroparamate cittaṁ niruddhaṁ yoga-sevayā\nyatra caivātmanātmānaṁ paśyann ātmani tuṣyati',
+          translation: 'In that state of joyful meditation, the mind, restrained by the practice of yoga, finds rest — and beholding the Self through the Self, the yogi rejoices in the Self.'
+        },
+      ],
+      confusion: [
+        {
+          chapter: 2, verse: 7, sanskrit: 'कार्पण्यदोषोपहतस्वभावः पृच्छामि त्वां धर्मसम्मूढचेताः।\nयच्छ्रेयः स्यान्निश्चितं ब्रूहि तन्मे शिष्यस्तेऽहं शाधि मां त्वां प्रपन्नम्॥',
+          transliteration: 'kārpaṇya-doṣopahata-svabhāvaḥ pṛcchāmi tvāṁ dharma-sammūḍha-cetāḥ\nyac chreyaḥ syān niścitaṁ brūhi tan me śiṣyas te \'haṁ śādhi māṁ tvāṁ prapannam',
+          translation: 'I am bewildered as to what is my duty, and am overcome by weakness. In this condition I am asking You to tell me for certain what is best for me. Now I am Your disciple and a soul surrendered. Please instruct me.'
+        },
+        {
+          chapter: 3, verse: 2, sanskrit: 'व्यामिश्रेणेव वाक्येन बुद्धिं मोहयसीव मे।\nतदेकं वद निश्चित्य येन श्रेयोऽहमाप्नुयाम्॥',
+          transliteration: 'vyāmiśreṇeva vākyena buddhiṁ mohayasīva me\ntad ekaṁ vada niścitya yena śreyo \'ham āpnuyām',
+          translation: 'My intelligence is bewildered by Your apparently conflicting instructions. Please tell me, decisively, which path is most beneficial for me.'
+        },
+        {
+          chapter: 18, verse: 61, sanskrit: 'ईश्वरः सर्वभूतानां हृद्देशेऽर्जुन तिष्ठति।\nभ्रामयन्सर्वभूतानि यन्त्रारूढानि मायया॥',
+          transliteration: 'īśvaraḥ sarva-bhūtānāṁ hṛd-deśe \'rjuna tiṣṭhati\nbhrāmayan sarva-bhūtāni yantrārūḍhāni māyayā',
+          translation: 'The Supreme Lord dwells in the hearts of all beings, O Arjuna, and by His divine power causes all beings to wander as if mounted on a machine.'
+        },
+      ],
+    };
+
+    // ── Helpers ────────────────────────────────────────────────────────────────
+    function show(id) { document.getElementById(id).classList.add('visible'); }
+    function hide(id) { document.getElementById(id).classList.remove('visible'); }
+    function setText(id, txt) { document.getElementById(id).textContent = txt; }
+
+    function fillAndSearch(text) {
+      document.getElementById('userInput').value = text;
+      findVerses();
+    }
+
+    // Enter key support
+    document.getElementById('userInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') findVerses();
+    });
+
+    // ── Main function ──────────────────────────────────────────────────────────
+    async function findVerses() {
+      const input = document.getElementById('userInput').value.trim();
+      if (!input) return;
+
+      // Reset
+      hide('emotionResult');
+      hide('versesSection');
+      hide('errorBox');
+      document.getElementById('versesList').innerHTML = '';
+
+      // Show loading
+      document.getElementById('loading').classList.add('visible');
+      document.getElementById('searchBtn').disabled = true;
+
+      try {
+        let emotion = 'unknown';
+        let verses = [];
+
+        // Try calling the Flask API (your RoBERTa model)
+        try {
+          const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: input }),
+            signal: AbortSignal.timeout(8000)
+          });
+          const data = await res.json();
+          emotion = data.emotion || 'unknown';
+        } catch (apiErr) {
+          // API offline — use simple keyword fallback
+          console.warn('Flask API unreachable, using keyword fallback:', apiErr.message);
+          emotion = keywordFallback(input);
+        }
+
+        // Get verses from Java Spring Boot backend
+        const verseRes = await fetch(`https://gita-backend-production.up.railway.app/api/verses?emotion=${emotion}`);
+        verses = await verseRes.json();
+
+        renderResults(input, emotion, verses);
+
+      } catch (err) {
+        document.getElementById('errorMsg').textContent = 'Could not fetch results. Please check the backend is running.';
+        show('errorBox');
+      } finally {
+        document.getElementById('loading').classList.remove('visible');
+        document.getElementById('searchBtn').disabled = false;
+      }
+    }
+
+    // ── Keyword fallback (mirrors your Java logic) ────────────────────────────
+    function keywordFallback(text) {
+      text = text.toLowerCase();
+      if (/angry|anger|furious|rage|hate|frustrated|mad|irritated/.test(text)) return 'anger';
+      if (/sad|sorrow|lonely|empty|depressed|hopeless|cry|tears/.test(text)) return 'sadness';
+      if (/fear|afraid|scared|terrified|worried|dread|panic|nervous/.test(text)) return 'fear';
+      if (/happy|joy|glad|grateful|excited|blessed|peaceful|content|thankful/.test(text)) return 'joy';
+      if (/confused|lost|unclear|uncertain|don't know|dont know|unsure/.test(text)) return 'confusion';
+      if (/desire|lust|craving|obsessed|can't stop wanting|addicted|tempted/.test(text)) return 'lust';
+      if (/greedy|want more|never enough|accumulate|possess|hoard/.test(text)) return 'greed';
+      if (/can't let go|attached|clinging|holding on|won't release/.test(text)) return 'attachment/delusion';
+      if (/miss them|lost someone|mourning|bereaved|passed away/.test(text)) return 'grief';
+      if (/anxious|overthinking|racing mind|can't stop worrying|on edge/.test(text)) return 'anxiety';
+      if (/disgusted|repulsed|revolted|sick of|nauseated/.test(text)) return 'disgust';
+      if (/shocked|surprised|can't believe|blindsided|stunned/.test(text)) return 'surprise';
+      if (/contempt|disdain|no respect|look down|scorn/.test(text)) return 'contempt';
+      if (/ashamed|guilty|regret|betrayed myself|shame/.test(text)) return 'shame/guilt';
+      return 'confusion';
+    }
+
+    // ── Render ─────────────────────────────────────────────────────────────────
+    function renderResults(input, emotion, verses) {
+      const meta = EMOTION_META[emotion] || EMOTION_META.unknown;
+
+      // Emotion badge
+      document.getElementById('emotionBadge').textContent = meta.label.toUpperCase();
+      document.getElementById('emotionIcons').textContent = meta.icon + ' ' + meta.icon + ' ' + meta.icon;
+      show('emotionResult');
+
+      // Verse cards
+      const list = document.getElementById('versesList');
+      verses.forEach((v, i) => {
+        const card = document.createElement('div');
+        card.className = 'verse-card';
+        card.innerHTML = `
+        <div class="verse-header">
+          <span class="verse-id">Bhagavad Gita · Chapter ${v.chapter}, Verse ${v.verse}</span>
+          <span class="verse-num">${i + 1} of ${verses.length}</span>
+        </div>
+        <div class="verse-body">
+          <div class="sanskrit-text">${(v.sanskrit || '').replace(/\\n/g, '<br>').replace(/\n/g, '<br>')}</div>
+<div class="transliteration">${(v.transliteration || '').replace(/\\n/g, ' ').replace(/\n/g, ' ')}</div>
+          <div class="translation-block">
+            <div class="translation-label">✦ English Meaning</div>
+<div class="translation-text">${v.translation || v.wordMeanings || ''}</div>          </div>
+        </div>
+      `;
+        list.appendChild(card);
+      });
+
+      show('versesSection');
+
+      // Scroll to results
+      document.getElementById('emotionResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+</body>
+
+</html>
