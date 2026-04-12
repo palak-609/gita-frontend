@@ -915,7 +915,7 @@
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text: input }),
-            signal: AbortSignal.timeout(8000)
+            signal: AbortSignal.timeout(30000)
           });
           const data = await res.json();
           emotion = data.emotion || 'unknown';
