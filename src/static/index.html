@@ -302,25 +302,27 @@
     }
 
     .purport-block {
-  margin-top: 12px;
-  border-top: 1px solid var(--cream-dark);
-  padding-top: 12px;
-}
-.purport-block summary {
-  font-family: 'IM Fell English SC', serif;
-  font-size: 0.8rem;
-  color: var(--saffron);
-  letter-spacing: 0.1em;
-  cursor: pointer;
-  opacity: 0.8;
-}
-.purport-text {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1rem;
-  color: var(--ink-soft);
-  line-height: 1.75;
-  margin-top: 10px;
-}
+      margin-top: 12px;
+      border-top: 1px solid var(--cream-dark);
+      padding-top: 12px;
+    }
+
+    .purport-block summary {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 0.8rem;
+      color: var(--saffron);
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      opacity: 0.8;
+    }
+
+    .purport-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1rem;
+      color: var(--ink-soft);
+      line-height: 1.75;
+      margin-top: 10px;
+    }
 
     .emotion-badge-label {
       font-family: 'Cormorant Garamond', serif;
@@ -440,123 +442,141 @@
     }
 
     /* ── Breathing Exercise ── */
-.breathing-section {
-  display: none;
-  text-align: center;
-  padding: 48px 0 32px;
-  animation: fadeUp 0.8s ease both;
-}
-.breathing-section.visible { display: block; }
+    .breathing-section {
+      display: none;
+      text-align: center;
+      padding: 48px 0 32px;
+      animation: fadeUp 0.8s ease both;
+    }
 
-.breathing-invite {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 1.1rem;
-  color: var(--gold-deep);
-  opacity: 0.75;
-  margin-bottom: 28px;
-}
+    .breathing-section.visible {
+      display: block;
+    }
 
-.breath-btn {
-  padding: 14px 36px;
-  background: linear-gradient(135deg, var(--maroon), #9B2A2A);
-  color: #FFE0B2;
-  border: none;
-  border-radius: 6px;
-  font-family: 'IM Fell English SC', serif;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(107,26,26,0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.breath-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(107,26,26,0.4); }
+    .breathing-invite {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gold-deep);
+      opacity: 0.75;
+      margin-bottom: 28px;
+    }
 
-.breath-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 10, 5, 0.92);
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0;
-  animation: fadeIn 0.5s ease;
-}
-.breath-modal.active { display: flex; }
+    .breath-btn {
+      padding: 14px 36px;
+      background: linear-gradient(135deg, var(--maroon), #9B2A2A);
+      color: #FFE0B2;
+      border: none;
+      border-radius: 6px;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(107, 26, 26, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-.breath-close {
-  position: absolute;
-  top: 24px; right: 28px;
-  background: none; border: none;
-  color: rgba(255,224,178,0.4);
-  font-size: 1.8rem;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-.breath-close:hover { color: rgba(255,224,178,0.9); }
+    .breath-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(107, 26, 26, 0.4);
+    }
 
-.breath-phase-label {
-  font-family: 'IM Fell English SC', serif;
-  font-size: 1.3rem;
-  letter-spacing: 0.15em;
-  color: #FFE0B2;
-  margin-bottom: 40px;
-  height: 1.6em;
-}
+    .breath-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 10, 5, 0.92);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0;
+      animation: fadeIn 0.5s ease;
+    }
 
-.breath-ring-wrap {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .breath-modal.active {
+      display: flex;
+    }
 
-.breath-circle {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 35%, rgba(245,162,52,0.6), rgba(232,98,10,0.3), rgba(107,26,26,0.5));
-  box-shadow: 0 0 40px rgba(232,98,10,0.25), 0 0 80px rgba(232,98,10,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .breath-close {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      background: none;
+      border: none;
+      color: rgba(255, 224, 178, 0.4);
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
 
-.breath-count {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.4rem;
-  color: rgba(255,224,178,0.9);
-  font-weight: 300;
-  user-select: none;
-}
+    .breath-close:hover {
+      color: rgba(255, 224, 178, 0.9);
+    }
 
-.breath-instruction {
-  margin-top: 40px;
-  font-family: 'Crimson Pro', serif;
-  font-style: italic;
-  font-size: 1rem;
-  color: rgba(255,224,178,0.45);
-  letter-spacing: 0.05em;
-}
+    .breath-phase-label {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.15em;
+      color: #FFE0B2;
+      margin-bottom: 40px;
+      height: 1.6em;
+    }
 
-.breath-stop-btn {
-  margin-top: 36px;
-  padding: 10px 28px;
-  background: transparent;
-  border: 1px solid rgba(255,224,178,0.2);
-  border-radius: 4px;
-  color: rgba(255,224,178,0.45);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
+    .breath-ring-wrap {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.breath-stop-btn:hover { border-color: rgba(255,224,178,0.5); color: rgba(255,224,178,0.8); }
+    .breath-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(245, 162, 52, 0.6), rgba(232, 98, 10, 0.3), rgba(107, 26, 26, 0.5));
+      box-shadow: 0 0 40px rgba(232, 98, 10, 0.25), 0 0 80px rgba(232, 98, 10, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .breath-count {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      color: rgba(255, 224, 178, 0.9);
+      font-weight: 300;
+      user-select: none;
+    }
+
+    .breath-instruction {
+      margin-top: 40px;
+      font-family: 'Crimson Pro', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(255, 224, 178, 0.45);
+      letter-spacing: 0.05em;
+    }
+
+    .breath-stop-btn {
+      margin-top: 36px;
+      padding: 10px 28px;
+      background: transparent;
+      border: 1px solid rgba(255, 224, 178, 0.2);
+      border-radius: 4px;
+      color: rgba(255, 224, 178, 0.45);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .breath-stop-btn:hover {
+      border-color: rgba(255, 224, 178, 0.5);
+      color: rgba(255, 224, 178, 0.8);
+    }
 
     .translation-block {
       background: var(--saffron-pale);
@@ -729,24 +749,24 @@
     </div>
 
     <!-- Breathing Exercise -->
-<div class="breathing-section" id="breathingSection">
-  <div class="divider"><span>✦</span></div>
-  <p class="breathing-invite">Take a moment to breathe and let the wisdom settle within you.</p>
-  <button class="breath-btn" onclick="startBreathing()">🌬 Begin Breathing Exercise</button>
-</div>
-
-<!-- Breathing Modal -->
-<div class="breath-modal" id="breathModal">
-  <button class="breath-close" onclick="stopBreathing()">✕</button>
-  <div class="breath-phase-label" id="breathPhaseLabel">Breathe In</div>
-  <div class="breath-ring-wrap">
-    <div class="breath-circle" id="breathCircle">
-      <span class="breath-count" id="breathCount">4</span>
+    <div class="breathing-section" id="breathingSection">
+      <div class="divider"><span>✦</span></div>
+      <p class="breathing-invite">Take a moment to breathe and let the wisdom settle within you.</p>
+      <button class="breath-btn" onclick="startBreathing()">🌬 Begin Breathing Exercise</button>
     </div>
-  </div>
-  <div class="breath-instruction" id="breathInstruction">through your nose</div>
-  <button class="breath-stop-btn" onclick="stopBreathing()">end session</button>
-</div>
+
+    <!-- Breathing Modal -->
+    <div class="breath-modal" id="breathModal">
+      <button class="breath-close" onclick="stopBreathing()">✕</button>
+      <div class="breath-phase-label" id="breathPhaseLabel">Breathe In</div>
+      <div class="breath-ring-wrap">
+        <div class="breath-circle" id="breathCircle">
+          <span class="breath-count" id="breathCount">4</span>
+        </div>
+      </div>
+      <div class="breath-instruction" id="breathInstruction">through your nose</div>
+      <button class="breath-stop-btn" onclick="stopBreathing()">end session</button>
+    </div>
     <!-- Error -->
     <div class="error-box" id="errorBox">
       <p id="errorMsg">Something went wrong. Please try again.</p>
@@ -895,21 +915,17 @@
       const input = document.getElementById('userInput').value.trim();
       if (!input) return;
 
-      // Reset
       hide('emotionResult');
       hide('versesSection');
       hide('errorBox');
       document.getElementById('versesList').innerHTML = '';
-
-      // Show loading
       document.getElementById('loading').classList.add('visible');
       document.getElementById('searchBtn').disabled = true;
 
       try {
         let emotion = 'unknown';
-        let verses = [];
 
-        // Try calling the Flask API (your RoBERTa model)
+        // Try Flask API, fall back to keyword
         try {
           const res = await fetch(API_URL, {
             method: 'POST',
@@ -919,20 +935,29 @@
           });
           const data = await res.json();
           emotion = data.emotion || 'unknown';
-        } catch (apiErr) {
-          // API offline — use simple keyword fallback
+        }
+        catch (apiErr) {
           console.warn('Flask API unreachable, using keyword fallback:', apiErr.message);
           emotion = keywordFallback(input);
         }
 
-        // Get verses from Java Spring Boot backend
-        const verseRes = await fetch(`https://gita-backend-ev93.onrender.com/api/verses?emotion=${emotion}`);
-        verses = await verseRes.json();
+        // Get verses from Render backend
+        let verses = [];
+        try {
+          const verseRes = await fetch(
+            `https://gita-backend-ev93.onrender.com/api/verses?emotion=${emotion}`,
+            { signal: AbortSignal.timeout(30000) }
+          );
+          verses = await verseRes.json();
+        } catch (verseErr) {
+          console.warn('Render backend slow, using fallback:', verseErr.message);
+          verses = FALLBACK_VERSES[emotion] || FALLBACK_VERSES['confusion'];
+        }
 
         renderResults(input, emotion, verses);
 
       } catch (err) {
-        document.getElementById('errorMsg').textContent = 'Could not fetch results. Please check the backend is running.';
+        document.getElementById('errorMsg').textContent = 'Could not fetch results. Please try again.';
         show('errorBox');
       } finally {
         document.getElementById('loading').classList.remove('visible');
@@ -1003,53 +1028,53 @@
     }
     // ── Breathing Exercise ────────
     // ──────────────────────────────────────────────
-let breathTimer = null;
+    let breathTimer = null;
 
-const PHASES = [
-  { label: 'Breathe In',  instruction: 'through your nose',  secs: 4, scale: 1.6 },
-  { label: 'Hold',        instruction: 'gently hold',         secs: 2, scale: 1.6 },
-  { label: 'Breathe Out', instruction: 'through your mouth', secs: 6, scale: 1.0 },
-];
+    const PHASES = [
+      { label: 'Breathe In', instruction: 'through your nose', secs: 4, scale: 1.6 },
+      { label: 'Hold', instruction: 'gently hold', secs: 2, scale: 1.6 },
+      { label: 'Breathe Out', instruction: 'through your mouth', secs: 6, scale: 1.0 },
+    ];
 
-function startBreathing() {
-  document.getElementById('breathModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-  runPhase(0);
-}
-
-function stopBreathing() {
-  clearTimeout(breathTimer);
-  document.getElementById('breathModal').classList.remove('active');
-  document.body.style.overflow = '';
-  const circle = document.getElementById('breathCircle');
-  circle.style.transition = 'none';
-  circle.style.transform = 'scale(1)';
-}
-
-function runPhase(phaseIndex) {
-  const phase = PHASES[phaseIndex];
-  const circle = document.getElementById('breathCircle');
-  document.getElementById('breathPhaseLabel').textContent = phase.label;
-  document.getElementById('breathInstruction').textContent = phase.instruction;
-
-  circle.style.transition = `transform ${phase.secs}s ease-in-out`;
-  circle.style.transform  = `scale(${phase.scale})`;
-
-  let remaining = phase.secs;
-  document.getElementById('breathCount').textContent = remaining;
-
-  const tick = () => {
-    remaining--;
-    if (remaining > 0) {
-      document.getElementById('breathCount').textContent = remaining;
-      breathTimer = setTimeout(tick, 1000);
-    } else {
-      const next = (phaseIndex + 1) % PHASES.length;
-      breathTimer = setTimeout(() => runPhase(next), 200);
+    function startBreathing() {
+      document.getElementById('breathModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      runPhase(0);
     }
-  };
-  breathTimer = setTimeout(tick, 1000);
-}
+
+    function stopBreathing() {
+      clearTimeout(breathTimer);
+      document.getElementById('breathModal').classList.remove('active');
+      document.body.style.overflow = '';
+      const circle = document.getElementById('breathCircle');
+      circle.style.transition = 'none';
+      circle.style.transform = 'scale(1)';
+    }
+
+    function runPhase(phaseIndex) {
+      const phase = PHASES[phaseIndex];
+      const circle = document.getElementById('breathCircle');
+      document.getElementById('breathPhaseLabel').textContent = phase.label;
+      document.getElementById('breathInstruction').textContent = phase.instruction;
+
+      circle.style.transition = `transform ${phase.secs}s ease-in-out`;
+      circle.style.transform = `scale(${phase.scale})`;
+
+      let remaining = phase.secs;
+      document.getElementById('breathCount').textContent = remaining;
+
+      const tick = () => {
+        remaining--;
+        if (remaining > 0) {
+          document.getElementById('breathCount').textContent = remaining;
+          breathTimer = setTimeout(tick, 1000);
+        } else {
+          const next = (phaseIndex + 1) % PHASES.length;
+          breathTimer = setTimeout(() => runPhase(next), 200);
+        }
+      };
+      breathTimer = setTimeout(tick, 1000);
+    }
   </script>
 </body>
 
