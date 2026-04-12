@@ -926,7 +926,7 @@
         }
 
         // Get verses from Java Spring Boot backend
-        const verseRes = await fetch(`https://gita-backend-production.up.railway.app/api/verses?emotion=${emotion}`);
+        const verseRes = await fetch(`https://gita-backend-ev93.onrender.com/api/verses?emotion=${emotion}`);
         verses = await verseRes.json();
 
         renderResults(input, emotion, verses);
